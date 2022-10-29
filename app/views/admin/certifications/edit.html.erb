@@ -1,0 +1,11 @@
+<h1>Admin::Certifications#edit</h1>
+<p>Find me in app/views/admin/certifications/edit.html.erb</p>
+
+<h2><%= @certification.name %> の編集</h2>
+
+<%= form_with model:@certification,url:admin_certification_path(@certification),method: :patch, local:true do |f| %>
+<%= f.text_field :name, autocomplete: "name",placeholder: "資格名" %>
+<br>
+<%= f.submit "変更を保存",class: "btn btn-primary" %>
+<% end %>
+

@@ -1,0 +1,23 @@
+<h2>ダイレクトメッセージ</h2>
+<p>Find me in app/views/public/rooms/show.html.erb</p>
+
+<%=link_to "プロフィール一覧に戻る", profiles_path %>
+
+<% @entries.each do |entries| %>
+<%= entries.user.id %>
+<%= entries.user.identification %>さん</a>
+<% end %>
+
+<% if @messages.present? %>
+  <% @messages.each do |message| %>
+    <%= message.user.identification %>さん
+    <%= message.body %>
+    <%= message.created_at.strftime("%Y-%m-%d %H:%M")%>
+  <% end %>
+<% end %>
+
+<%= form_with model: @message do |f| %>
+<%= f.text_area :body ,placeholder: "メッセージを入力してください" %>
+<%= f.hidden_field :room_id, value: @room.id %>
+<%= f.submit "投稿" %>
+<% end %>

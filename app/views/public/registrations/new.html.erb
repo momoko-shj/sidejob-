@@ -1,0 +1,73 @@
+<div class="container">
+
+<h2>新規登録</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "public/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :"お名前" %><br />
+    <%= f.text_field :name, autocomplete: "name" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :"ID" %><br />
+    <%= f.text_field :identification, autocomplete: "identification" %>
+  </div>
+   <p>当サイトでは名前ではなくIDが表示されます</p>
+  
+  
+  <div class="field">
+    <%= f.label :"メールアドレス" %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :"電話番号" %><br />
+    <%= f.phone_field :phone, autocomplete: "phone" %>
+  </div>
+  
+  
+  <p>住所</p>
+   <div class="field">
+    <%= f.label :"郵便番号" %><br />
+    <%= f.text_field :postal_code, autocomplete: "postal_code" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :"都道府県" %><br />
+    <%= f.text_field :prefecture, autocomplete: "prefecture" %>
+  </div>
+   
+  <div class="field">
+    <%= f.label :"市町村" %><br />
+    <%= f.text_field :city, autocomplete: "city" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :"町名・番地・号・部屋番号" %><br />
+    <%= f.text_field :town, autocomplete: "town" %>
+  </div>
+  
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "新規登録へ" %>
+  </div>
+<% end %>
+
+<%= render "public/shared/links" %>
+
+</div>

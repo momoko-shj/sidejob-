@@ -1,0 +1,21 @@
+<h1>Admin::Certifications#show</h1>
+<p>Find me in app/views/admin/certifications/show.html.erb</p>
+<h2>資格一覧</h2>
+
+<% @certifications. each do |cert| %>
+<%= cert.name %>
+<%= link_to "編集", edit_admin_certification_path(cert),class:"btn btn-success" %>
+<% end %>
+
+<h2>新規登録</h2>
+<%= form_with model:@certification,url:admin_certifications_path do |f| %>
+<%= f.text_field :name, autocomplete: "name",placeholder: "資格名" %>
+<br>
+<%= f.submit '新規登録',class: "btn btn-primary" %>
+<% end %>
+
+
+
+
+
+

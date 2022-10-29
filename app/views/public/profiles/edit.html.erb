@@ -1,0 +1,44 @@
+<h2>プロフィール編集</h1>
+<p>Find me in app/views/public/profiles/edit.html.erb</p>
+
+<%= link_to "職歴登録へ", work_experience_path(@user) %>
+
+<%= form_with model: @profile, url: profile_path(@profile), method: :patch do |f| %>
+
+
+  <%= f.label :birthday, "生年月日" %>
+  <%= f.date_field :birthday %><br>
+  
+  <%= f.label :education, "最終学歴" %>
+  <%= f.text_field :education %><br>
+  
+  <%= f.label :introduction, "自己紹介" %>
+  <%= f.text_area :introduction %><br>
+  
+  <%= f.label :skill, "特技・スキル" %>
+  <%= f.text_area :skill %><br>
+  
+  
+  <% Certification.all.each do |certification| %>
+    <%= f.label :certification_name, certification.name %>
+    <% if @profile.certifications.ids.include?(certification.id) %>
+      <input type="checkbox" value="<%= certification.id %>" name="profile[certification_ids][]" id="profile_certification_id" checked>
+    <% else %>
+      <input type="checkbox" value="<%= certification.id %>" name="profile[certification_ids][]" id="profile_certification_id">
+  <% end %>
+<% end %>
+<br>
+
+
+<%= f.label :other_certification, "そのほかの資格" %>
+<%= f.text_area :other_certification %><br>
+
+<%= f.label :additional_information, "その他（就業条件など）" %>
+<%= f.text_area :additional_information %><br>
+
+<%= f.label :image, "プロフィール画像" %>
+<%= f.file_field :image, accept: "image/*" %><br>
+
+<%= f.submit "保存する" %><br>
+
+<% end %>

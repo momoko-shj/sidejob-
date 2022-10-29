@@ -1,0 +1,22 @@
+<h2>職歴編集</h2>
+
+<%= form_with model: @work_experience,url: work_experience_path(@work_experience), method: :patch do |f| %>
+
+<%= f.label :company_name, "勤務先名" %>
+<%= f.text_area :company_name %><br>
+
+<%= f.label :industory_type, "業種" %>
+<%= f.select :industory_type, WorkExperience.industory_types.keys.map {|k| [I18n.t("enums.work_experience.industory_type.#{k}"), k]} %><br>
+
+<%= f.label :joined_date, "入社年月" %>
+<%= f.month_field :joined_date %><br>
+
+<%= f.label :position, "職務" %>
+<%= f.select :position, WorkExperience.positions.keys.map {|k| [I18n.t("enums.work_experience.position.#{k}"), k]} %><br>
+
+<%= f.label :career_history, "職務詳細" %>
+<%= f.text_area :career_history %><br>
+
+<%= f.submit "保存する" %><br>
+
+<% end %>

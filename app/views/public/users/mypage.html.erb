@@ -1,0 +1,28 @@
+<h2><%= current_user.name %>さんのマイページ</h2>
+<p>Find me in app/views/public/users/show.html.erb</p>
+
+<%= link_to "登録プロフィール一覧" ,profiles_path %>
+
+<%= link_to "職歴登録へ" ,work_experience_path(current_user) %>
+
+<h2>最新ダイレクトメール</h2><br>
+<% @messages.each do |message| %>
+<%= link_to message.user.identification, room_path(message.room_id) %>
+<%= message.created_at.strftime("%Y-%m-%d %H:%m") %>
+<% end %>
+
+<h2>フォロー中のプロフィール</h2><br>
+
+
+<h2>プロフィール　プレビュー</h2><br>
+
+<p>年齢</p>
+<%= @profile.age %> 歳<br>
+
+<p>最終学歴</p>
+
+<%= @profile.education %><br>
+
+
+
+<%= link_to "プロフィールの編集" ,edit_profile_path(@profile) %>

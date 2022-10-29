@@ -1,0 +1,22 @@
+ja:
+  enums:
+    work_experience:
+      industory_type:
+        seizo: "製造業"
+        kensetsu: "建設業"
+        kouri: "小売業"
+        service: "サービス業"
+        koukoku: "広告業"
+        kinyu: "金融"
+        sonohoka: "その他"
+      position:
+        eigyo: "営業"
+        hanbai: "販売"
+        iryo: "医療・福祉"
+        keieikikaku: "経営企画"
+        kensetsu: "建設"
+        programer: "SE・プログラマー"
+        denkigishi: "電気技師"
+        kaihatsu: "開発"
+        designer: "デザイン　クリエイティブ"
+        biyou: "美容"

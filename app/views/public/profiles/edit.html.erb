@@ -1,44 +1,54 @@
-<h2>プロフィール編集</h1>
-<p>Find me in app/views/public/profiles/edit.html.erb</p>
-
-<%= link_to "職歴登録へ", work_experience_path(@user) %>
+<div class="container">
+<h4 class = "pt-3">プロフィール編集</h4>
 
 <%= form_with model: @profile, url: profile_path(@profile), method: :patch do |f| %>
+<table class = "table table-borderless">
+<tr>
+  <td><%= f.label :birthday, "生年月日" %></td>
+  <td><%= f.date_field :birthday %></td>
+</tr>
+<tr>
+  <td><%= f.label :education, "最終学歴" %></td>
+  <td><%= f.text_field :education %></td>
+</tr>
+<tr>
+  <td><%= f.label :introduction, "自己紹介" %></td>
+  <td><%= f.text_area :introduction %></td>
+</tr>
+<tr>
+  <td><%= f.label :skill, "特技・スキル" %></td>
+  <td><%= f.text_area :skill %></td>
+</tr>
 
+<!--  <#% Certification.all.each do |certification| %>-->
+<!--    <%#= f.label :certification_name, certification.name %>-->
+<!--    <%# if @profile.certifications.ids.include?(certification.id) %>-->
+<!--      <input type="checkbox" value="<%#= certification.id %>" name="profile[certification_ids][]" id="profile_certification_id" checked>-->
+<!--    <%# else %>-->
+<!--      <input type="checkbox" value="<%#= certification.id %>" name="profile[certification_ids][]" id="profile_certification_id">-->
+<!--  <%# end %>-->
+<!--<%# end %>-->
 
-  <%= f.label :birthday, "生年月日" %>
-  <%= f.date_field :birthday %><br>
-  
-  <%= f.label :education, "最終学歴" %>
-  <%= f.text_field :education %><br>
-  
-  <%= f.label :introduction, "自己紹介" %>
-  <%= f.text_area :introduction %><br>
-  
-  <%= f.label :skill, "特技・スキル" %>
-  <%= f.text_area :skill %><br>
-  
-  
-  <% Certification.all.each do |certification| %>
-    <%= f.label :certification_name, certification.name %>
-    <% if @profile.certifications.ids.include?(certification.id) %>
-      <input type="checkbox" value="<%= certification.id %>" name="profile[certification_ids][]" id="profile_certification_id" checked>
-    <% else %>
-      <input type="checkbox" value="<%= certification.id %>" name="profile[certification_ids][]" id="profile_certification_id">
-  <% end %>
+<tr>
+<td><%= f.label :other_certification, "資格" %></td>
+<td><%= f.text_area :other_certification %></td>
+</tr>
+<tr>
+<td><%= f.label :additional_information, "その他（就業条件など）" %></td>
+<td><%= f.text_area :additional_information %></td>
+</tr>
+<tr>
+<td><%= f.label :image, "プロフィール画像" %></td>
+<td><%= f.file_field :image, accept: "image/*" %></td>
+</tr>
+</table>
+<div class = "text-right pd-3">
+<%= f.submit "保存する", class:"btn btn-success" %>
+</div>
 <% end %>
-<br>
 
+<div class = "pt-3">
+<%= link_to "職務経歴を登録する", work_experience_path(@user) ,class: 'btn btn-primary' %>
+</div>
 
-<%= f.label :other_certification, "そのほかの資格" %>
-<%= f.text_area :other_certification %><br>
-
-<%= f.label :additional_information, "その他（就業条件など）" %>
-<%= f.text_area :additional_information %><br>
-
-<%= f.label :image, "プロフィール画像" %>
-<%= f.file_field :image, accept: "image/*" %><br>
-
-<%= f.submit "保存する" %><br>
-
-<% end %>
+</div>

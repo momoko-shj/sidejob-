@@ -1,12 +1,10 @@
-<div class="container">
+<div class = "container">
 
-<h4 class = "pt-3">新規登録</h4>
+<h4>登録情報編集</h4>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
-
-<table class = "table table-borderless">
-  <tr>
+<%= form_with model:@user,url: user_path(@user), method: :patch do |f| %>
+<table class = "table">
+<tr>
     <td><%= f.label :"お名前" %></td>
     <td> <%= f.text_field :name, autocomplete: "name" %></td>
   </tr>
@@ -38,19 +36,11 @@
     <td><%= f.label :"町名・番地・号・部屋番号" %></td>
     <td><%= f.text_field :town, autocomplete: "town",:size=>"60x10" %></td>
   </tr>
-  <tr>
-    <td><%= f.label :"パスワード (6文字以上)" %></td>
-    <td><%= f.password_field :password, autocomplete: "new-password" %></td>
-  </tr>
-  <tr>
-    <td><%= f.label :"パスワード再入力" %></td>
-    <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
-  </tr>
   
   </table>
 
   <div class="pl-3">
-    <%= f.submit "新規登録へ",class:"btn btn-primary" %>
+    <%= f.submit "更新",class:"btn btn-success" %>
   </div>
 <% end %>
 

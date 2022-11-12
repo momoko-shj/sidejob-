@@ -3,6 +3,27 @@ class Public::UsersController < ApplicationController
  def mypage
     @profile = current_user.profile
     @messages = current_user.messages.all
+    @follows = current_user.follows.all
+    @comments = current_user.comments.all
+ end
+ 
+ def edit
+   @user = User.find(params[:id])
+ end
+ 
+ def update
+   @user = User.find(params[:id])
+   @user.update(user_params) ? (redirect_to mypage_path) : (render edit) 
+ end
+
+ def unsubscribe
+ end
+
+ def withdraw
+ current_user.update(is_deleted: true)
+ reset_session
+ flash[:notice] = "退会処理を行いました。"
+ redirect_to root_path
  end
  
   private

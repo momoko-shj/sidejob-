@@ -1,2 +1,30 @@
-<h1>Searches#result</h1>
-<p>Find me in app/views/searches/result.html.erb</p>
+<div class = "container">
+<h4 class = "pt-3">プロフィール検索結果一覧</h4>
+
+<% @profiles.each do |profile| %>
+ <% if current_user %> 
+  <% if profile.is_active == true && profile.user.is_deleted == false %>
+  
+   <% if profile.image.attached? %>
+    <%= image_tag profile.image,size:"50,50", class:"offset-md-1 top-img" %>
+   <% else %>
+    <%= image_tag 'noimage.png', size: "50x50", class:"offset-md-1 top-img" %>
+   <% end %>
+  
+   <%= link_to profile.user.identification, profile_path(profile) %>
+  <% end %>
+ 
+ <% else %>
+ 
+  <% if profile.image.attached? %>
+    <%= image_tag profile.image,size:"50,50", class:"offset-md-1 top-img" %>
+   <% else %>
+    <%= image_tag 'noimage.png', size: "50x50", class:"offset-md-1 top-img" %>
+   <% end %>
+  
+  <%= link_to profile.user.identification, admin_user_path(profile.user) %>
+ <% end %>
+
+<% end %>
+ 
+ </div>

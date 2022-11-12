@@ -1,1 +1,19 @@
 @import '~bootstrap/scss/bootstrap';
+
+ .jumbotron {
+  background-image:url('/sidejob/app/assets/images/top.jpg');
+  background-size: cover;
+  background-position: center 60%;
+}
+
+ .top-img{
+  width:100px;
+  height:100px;
+  object-fit: cover;
+ }
+
+.show-img{
+  width:300px;
+  height:300px;
+  object-fit: contain;
+}

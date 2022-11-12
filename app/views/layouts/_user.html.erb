@@ -1,0 +1,74 @@
+<% if profile.image.attached? %>
+<%= image_tag profile.image, size:"100,100", class:"offset-md-1 show-img" %>
+<% else %>
+<%= image_tag 'noimage.png', size: "100x100", class:"offset-md-1 show-img" %>
+<% end %>
+
+<table class= "table">
+<tr>
+<th style="width:25%"></th>
+<th style="width:75%"></th>
+</tr>
+<tr> 
+<td>住所（都道府県）</td>
+<td><%= user.prefecture %></td>
+</tr>
+<tr>
+<td>年齢</td>
+<td><%= profile.age %></td>
+</tr>
+<tr>
+<td>最終学歴</td>
+<td><%= profile.education %></td>
+</tr>
+<tr>
+<td>資格</td>
+<td><%= profile.other_certification %></td>
+</tr>
+<tr>
+<td>特技・スキル</td>
+<td><%= profile.skill %></td>
+</tr>
+
+<tr>
+<td>自己紹介</td>
+<td><%= profile.introduction %></td>
+</tr>
+<tr>
+<td>その他</td>
+<td><%= profile.additional_information %></td>
+</tr>
+<tr>
+</table>
+
+<h4 class ="pt-3">職務経歴</h4>
+<table class = "table" >
+<% work_experience.each do |work| %>
+<tr>
+<th style="width:25%"></th>
+<th style="width:75%"></th>
+</tr>
+<tr>
+  <td>会社名</td>
+  <td><%= work.company_name %></td>
+  </tr>
+  <td>業種</td>
+  <td><%= work.industory_type_i18n %></td>
+  </tr>
+  <td>入社年月</td>
+  <td><%= work.joined_date&.strftime('%Y年%m月') %></td>
+  </tr>
+  <td>職務</td>
+  <td><%= work.position_i18n %></td>
+  </tr>
+  <td>職務詳細</td>
+  <td><%= work.career_history %></td>
+  </tr>
+  <tr>
+  <td></td>
+  <td></td>
+  </tr>
+<% end %>
+</table>
+
+

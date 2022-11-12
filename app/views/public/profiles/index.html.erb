@@ -1,12 +1,29 @@
+<div class = "container">
 <h2>登録ユーザープロフィール一覧</h2>
 
 <table class = "table">
-<% @profiles.each do |profile| %>
 <tr>
-  <td>名前</td>
-  <td><%= link_to profile.user.identification, profile_path(profile) %></td>
-  <td>自己紹介</td>
-  <td><%= profile.introduction %></td>
+  <th></th>
+  <th>名前</th>
+  <th>自己紹介</th>
+  <th>更新日時</th>
+</tr>
+<tr>
+<% @profiles.each do |profile| %>
+<% if profile.is_active == true && profile.user.is_deleted == false %>
+<td>
+<% if profile.image.attached? %>
+<%= image_tag profile.image,size:"50,50", class:"offset-md-1 top-img" %>
+<% else %>
+<%= image_tag 'noimage.png', size: "50x50", class:"offset-md-1 top-img" %>
+<% end %>
+</td>
+<td><%= link_to profile.user.identification, profile_path(profile) %></td>
+<td><%= profile.introduction %></td>
+<td><%= profile.updated_at&.strftime('%Y年%m月%d日 %H:%M') %></td>
 </tr>
 <% end %>
+<% end %>
 </table>
+
+</div>

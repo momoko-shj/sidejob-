@@ -42,7 +42,7 @@ class Public::ProfilesController < ApplicationController
   end
   
   def index
-    @profiles = Profile.all
+    @profiles = Profile.all.order(updated_at: :desc)
   end
   
   # ダイレクトメールの実装
@@ -50,6 +50,7 @@ class Public::ProfilesController < ApplicationController
     @profile = Profile.find(params[:id])
     @comment = Comment.new
     @user = @profile.user
+    @work_experience = @user.work_experiences
     @currentUserEntry = Entry.where(user_id: current_user.id)
     @userEntry = Entry.where(user_id: @user.id)
     if @user.id != current_user.id

@@ -11,7 +11,7 @@ class Public::CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:profile_id])
     @comment.destroy
-    redirect_to profile_path(params[:profile_id])
+    redirect_to profile_path(:profile_id)
   end
 
 private

@@ -1,28 +1,103 @@
-<h2><%= current_user.name %>さんのマイページ</h2>
-<p>Find me in app/views/public/users/show.html.erb</p>
+<div class="container">
+<h4 class = "pt-3"><%= current_user.name %>さんのマイページ</h4>
 
-<%= link_to "登録プロフィール一覧" ,profiles_path %>
+<h4 class = "pt-3">ダイレクトメール</h4>
+<table class = "table table-borderless">
+<tr>
+  <th style="width:25%"></th>
+  <th style="width:50%"></th>
+  <th style="width:25%"></th>
+</tr>
+  <% @messages.each do |message| %>
+<tr>
+ <td><%= link_to message.user.identification, room_path(message.room_id) %></td>
+ <td><%= message.body %></td>
+ <td><%= message.created_at.strftime("%Y-%m-%d %H:%m") %></td>
+</tr>
+ <% end %>
+</table>
 
-<%= link_to "職歴登録へ" ,work_experience_path(current_user) %>
-
-<h2>最新ダイレクトメール</h2><br>
-<% @messages.each do |message| %>
-<%= link_to message.user.identification, room_path(message.room_id) %>
-<%= message.created_at.strftime("%Y-%m-%d %H:%m") %>
+<h4 class = "pt-5">コメント一覧</h4>
+<table class = "table table-borderless">
+<tr>
+  <th style="width:25%"></th>
+  <th style="width:50%"></th>
+  <th style="width:25%"></th>
+</tr>
+<% @comments.each do |comment| %>
+<tr>
+<td><%= link_to comment.profile.user.identification,profile_path(comment.profile)  %></td>
+<td><%= comment.text %></td>
+<td><%= comment.created_at.strftime("%Y-%m-%d %H:%m") %></td>
+</tr>
 <% end %>
-
-<h2>フォロー中のプロフィール</h2><br>
-
-
-<h2>プロフィール　プレビュー</h2><br>
-
-<p>年齢</p>
-<%= @profile.age %> 歳<br>
-
-<p>最終学歴</p>
-
-<%= @profile.education %><br>
+</table>
 
 
+<h4 class = "pt-5">フォロー中のプロフィール</h4>
+<table class = "table table-borderless">
+<tr>
+<th style="width:25%"></th>
+<th style="width:25%"></th>
+<th style="width:50%"></th>
 
-<%= link_to "プロフィールの編集" ,edit_profile_path(@profile) %>
+</tr>
+<% @follows.each do |follow| %>
+<tr>
+<td><%= link_to follow.profile.user.identification, profile_path(follow.profile) %></td>
+<td><%= follow.profile.user.created_at.strftime("%Y-%m-%d %H:%m") %></td>
+</tr>
+<% end %>
+</table>
+
+<%#= link_to "職歴登録へ" ,work_experience_path(current_user.work_experiences), class: 'btn btn-primary' %>
+
+<div class = "pl-3 pt-3">
+<%= link_to "自分のプロフィールを確認する" ,profile_path(current_user.profile),class: 'btn btn-primary' %>
+</div>
+
+<h4 class="pt-5">登録情報</h4>
+<table class = "table table-borderless">
+<tr>
+<th style="width:30%"></th>
+<th style="width:70%"></th>
+</tr>
+<tr>
+<td>名前</td>
+<td><%= current_user.name %></td>
+</tr>
+<tr>
+<td>登録メールアドレス</td>
+<td><%= current_user.email %></td>
+</tr>
+<tr>
+<td>ID</td> 
+<td><%= current_user.identification %></td>
+</tr>
+<tr>
+<td>電話番号</td> 
+<td><%= current_user.phone %></td>
+</tr>
+<tr>
+<td>住所</td> 
+<td>〒<%= current_user.postal_code %><br>
+<%= current_user.prefecture %>
+<%= current_user.city %>
+<%= current_user.town %></td>
+</tr>
+<tr>
+<td>年齢</td>
+<td><%= @profile.age %> 歳</td>
+</tr>
+<tr>
+<td>最終学歴</td>
+<td><%= @profile.education %></td>
+</tr>
+</table>
+
+<div class = "pl-3 pt-3">
+<%= link_to '登録情報を変更する', edit_user_path(current_user),class:"btn btn-primary" %>
+<%= link_to '退会する', unsubscribe_users_path(current_user),class:"btn btn-danger" %>
+</div>
+
+</div>

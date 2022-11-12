@@ -1,55 +1,77 @@
-<h2><%= @user.identification %>さんのプロフィール</h2>
+<div class="container">
 
-<h2>プロフィール</h2>
+<h4 class = "pt-3"><%= @user.identification %>さんのプロフィール</h4>
 
-<h2>職歴</h2>
+<%= render 'layouts/user', user: @user, profile: @profile, work_experience: @work_experience %>
 
-<h2>メッセージを送る</h2>
+<div class = "row pt-5">
+ <div class = "col-md-8">
+ <%= form_with model:[@profile, @comment] do |f| %>
+ <%= f.text_area :text, rows: '5',placeholder: "このユーザーにコメントする",size: "80X10" %>
+ <%= f.submit "送信する", class:"btn btn-success" %>
+ <% end %>
+</div>
+</div>
+
+<div class = "row">コメント一覧　全<%= @profile.comments.count %>件</div>
+
+<table class = "table table-borderless">
+ <% @profile.comments.each do |comment| %>
+ <tr>
+  <td><%= link_to comment.user.identification,profile_path(comment.user.profile) %></td>
+  <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
+  <td><%= comment.text %></td>
+  <td><% if comment.user == current_user %>
+   <%= link_to "削除", profile_comment_path(comment), method: :delete,class:"btn btn-danger" %>
+  <% end %></td>
+ </tr>
+ <% end %>
+ </table>
+
+
+<% if @profile == current_user.profile %>
+
+<div class = "pt-3 pl-3 pd-3">
+ <%= link_to "自分のプロフィール、職務経歴を編集する" ,edit_profile_path(@profile), class:"btn btn-primary" %>
+</div>
+
+<div class = "pl-3 pd-3 pt-3">
+<%= form_with model: current_user.profile do |f| %>
+<%= f.radio_button :is_active, :true %>
+<%= f.label :gender, "プロフィールを公開する", {value: :true, style: "display: inline-block;"} %>
+<%= f.radio_button :is_active, :false %>
+<%= f.label :gender, "プロフィールを公開しない", {value: :false, style: "display: inline-block;"} %>
+<%= f.submit "更新する",class:"btn btn-success" %>
+<% end %>
+</div>
+
+<% else %>
+
+<div class = "row pb-3">
+<div class = "col-md-4">
 <% if @user.id != current_user.id %>
   <% if @isRoom == true %>
-   <%= link_to "メッセージへ",room_path %>
-   <!--上記のコメントが表示されない　ifが上手く機能していない？-->
+   <%= link_to "このユーザーにメッセージを送る",room_path, class: 'btn btn-primary' %> 
+   <!--上記のコメントが表示されない ifが上手く機能していない？-->
   <% else %>
    <%= form_with model: @room do |f| %>
      <%= fields_for @entry do |entry| %>
       <%= f.hidden_field :user_id, value: @user.id %>
      <% end %>
-      <%= f.submit "初めてメッセージを送る" %>
-     <!--rooms/showに転送したいのにrooms/indexに転送される　どこで転送設定されているのかがわからない-->
-   <% end %>
+      <%= f.submit "このユーザーに初めてメッセージを送る",class:"btn btn-primary" %>
+     <% end %>
   <% end %>
 <% end %>
-
-<!--follow_byのメソッドが認識されていない undefined method `follow_by?' f-->
-<% if @profile.follow_by?(current_user) %>
- <p><%= link_to profile_follows_path(@profile), method: :delete do %>フォローをやめる
- <% end %></p>
-<% else %>
- <p><%= link_to profile_follows_path(@profile), method: :post do %>フォローする
- <% end %></p>
-<% end %>
-
-
-<!--https://note.com/ya_jp/n/nf61a9cdd27a8 roomsコントローラーから-->
-<!--参考その２https://qiita.com/bindingpry/items/6790c91f374acc25bea2-->
-
-<div>
- <%= form_with model:[@profile, @comment] do |f| %>
-  <%= f.text_area :text, rows: '5',placeholder: "ご質問やコメントはこちらから" %>
-  <%= f.submit "送信する" %>
- <% end %>
 </div>
-<div>
- <p>件数：<%= @profile.comments.count %></p>
- <% @profile.comments.each do |comment| %>
-  <%= comment.user.identification %>
-  <%= comment.created_at.strftime('%Y/%m/%d') %>
-  <%= comment.text %>
-  <% if comment.user == current_user %>
-   <%= link_to "削除", profile_comment_path(comment), method: :delete %>
-  <% end %>
+
+<div class = "col-md-4">
+<% if @profile.follow_by?(current_user) %>
+<%= link_to 'このユーザーのフォローをやめる', profile_follows_path(@profile), method: :delete, class: 'btn btn-danger' %>
+<% else %>
+<%= link_to 'このユーザーをフォローする', profile_follows_path(@profile), method: :post, class: 'btn btn-success' %>
+<% end %>
+</div>
+</div>
+
  <% end %>
  </div>
-
-
-

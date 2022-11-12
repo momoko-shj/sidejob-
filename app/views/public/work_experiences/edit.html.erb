@@ -1,22 +1,32 @@
-<h2>職歴編集</h2>
+<div class="container">
+<h4 class = "pt-3">職務経歴編集</h4>
 
 <%= form_with model: @work_experience,url: work_experience_path(@work_experience), method: :patch do |f| %>
 
-<%= f.label :company_name, "勤務先名" %>
-<%= f.text_area :company_name %><br>
+<table class = "table table-borderless">
+<tr>
+<td><%= f.label :company_name, "勤務先名" %></td>
+<td><%= f.text_area :company_name %></td>
+</tr>
+<tr>
+<td><%= f.label :industory_type, "業種" %></td>
+<td><%= f.select :industory_type, WorkExperience.industory_types.keys.map {|k| [I18n.t("enums.work_experience.industory_type.#{k}"), k]} %></td>
+</tr>
+<tr>
+<td><%= f.label :joined_date, "入社年月" %></td>
+<td><%= f.month_field :joined_date %></td>
+</tr>
+<tr>
+<td><%= f.label :position, "職務" %></td>
+<td><%= f.select :position, WorkExperience.positions.keys.map {|k| [I18n.t("enums.work_experience.position.#{k}"), k]} %></td>
+</tr>
+<tr>
+<td><%= f.label :career_history, "職務詳細" %></td>
+<td><%= f.text_area :career_history %></td>
+</tr>
+</table>
 
-<%= f.label :industory_type, "業種" %>
-<%= f.select :industory_type, WorkExperience.industory_types.keys.map {|k| [I18n.t("enums.work_experience.industory_type.#{k}"), k]} %><br>
-
-<%= f.label :joined_date, "入社年月" %>
-<%= f.month_field :joined_date %><br>
-
-<%= f.label :position, "職務" %>
-<%= f.select :position, WorkExperience.positions.keys.map {|k| [I18n.t("enums.work_experience.position.#{k}"), k]} %><br>
-
-<%= f.label :career_history, "職務詳細" %>
-<%= f.text_area :career_history %><br>
-
-<%= f.submit "保存する" %><br>
+<%= f.submit "更新する",class:"btn btn-primary" %>
 
 <% end %>
+</div>

@@ -1,45 +1,55 @@
-<h2>プロフィール登録</h2>
-<p>Find me in app/views/public/profiles/new.html.erb</p>
+<div class ="container">
 
-<%#= link_to "職歴登録へ" ,work_experience_path(@user) %>
+<h4 class = "pt-3">プロフィール登録</h4>
 
 <%= form_with model: @profile do |f| %>
+<table class = "table table-borderless">
+  
+<tr>
+<td><%= f.label :birthday, "生年月日" %></td>
+<td><%= f.date_field :birthday %></td>
+</tr>
 
-<%= f.label :birthday, "生年月日" %>
-<%= f.date_field :birthday %><br>
+<tr>
+<td><%= f.label :education, "最終学歴" %></td>
+<td><%= f.text_field :education,size: "50x10" %></td>
+</tr>
+<tr>
+<td><%= f.label :introduction, "自己紹介" %></td>
+<td><%= f.text_area :introduction,size: "80X20" %></td>
+</tr>
+<tr>
+<td><%= f.label :skill, "特技・スキル" %></td>
+<td><%= f.text_area :skill,size: "80X20" %></td>
+</tr>
+<tr>
+<td><%= f.label :other_certification, "資格" %></td>
+<td><%= f.text_area :other_certification,size: "80X20" %></td>
+</tr>
+<tr>
+<td><%= f.label :additional_information, "その他（就業条件など）" %></td>
+<td><%= f.text_area :additional_information,size: "80X20" %></td>
+</tr>
+<tr>
+<td><%= f.label :image, "プロフィール画像" %></td>
+<td><%= f.file_field :image, accept: "image/*" %></td>
+</tr>
+</table>
 
-<%= f.label :education, "最終学歴" %>
-<%= f.text_field :education %><br>
+<%= f.submit "登録する" ,class:'btn btn-success' %><br>
 
-<%= f.label :introduction, "自己紹介" %>
-<%= f.text_area :introduction %><br>
-
-<%= f.label :skill, "特技・スキル" %>
-<%= f.text_area :skill %><br>
-
-<% Certification.all.each do |certification| %>
-<%= f.label :certification_name, certification.name %>
-<input type="checkbox" value="<%= certification.id %>" name="profile[certification_ids][]" id="profile_certification_id">
 <% end %>
-<br>
+
+</div>
+
+<%# Certification.all.each do |certification| %>
+<%#= f.label :certification_name, certification.name %>
+<!--<input type="checkbox" value="<%#= certification.id %>" name="profile[certification_ids][]" id="profile_certification_id">-->
+<%# end %>
+<!--<br>-->
 
 
 <%#= f.label :certification, "資格" %>
 <%#= f.check_box :certification %>
 <%#= f.collection_check_boxes :certification_ids,  Certification.all, :id, :name %>
 
-
-<%= f.label :other_certification, "資格" %>
-<%= f.text_area :other_certification %><br>
-
-<%= f.label :additional_information, "その他（就業条件など）" %>
-<%= f.text_area :additional_information %><br>
-
-<%= f.label :image, "プロフィール画像" %>
-<%= f.file_field :image, accept: "image/*" %><br>
-
-<%= f.submit "登録する" %><br>
-
-<% end %>
-
-<%#= link_to "登録せずにマイページへ" ,mypage_path(@user) %>

@@ -1,51 +1,74 @@
-<h2>職歴</h2>
-<p>Find me in app/views/public/work_experiences/show.html.erb</p>
+<div class="container">
+<h4 class = "pt-3"><%= current_user.identification %>さんの職務経歴</h4>
+
+<h4 class = "pt-3">新規入力</h4>
+
+<%= form_with model: @work_experience do |f| %>
+<table class = "table table-borderless">
+<tr>
+<td><%= f.label :company_name, "会社名" %></td>
+<td><%= f.text_area :company_name %></td>
+</tr>
+<tr>
+<td><%= f.label :industory_type, "業種" %></td>
+<td><%= f.select :industory_type, WorkExperience.industory_types.keys.map {|k| [I18n.t("enums.work_experience.industory_type.#{k}"), k]} %></td>
+</tr>
+<tr>
+<td><%= f.label :joined_date, "入社年月" %></td>
+<td><%= f.month_field :joined_date %></td>
+</tr>
+<tr>
+<td><%= f.label :position, "職務" %></td>
+<td><%= f.select :position, WorkExperience.positions.keys.map {|k| [I18n.t("enums.work_experience.position.#{k}"), k]} %></td>
+</tr>
+<tr>
+<td><%= f.label :career_history, "職務詳細" %></td>
+<td><%= f.text_area :career_history %></td>
+</tr>
+</table>
+<div class = "pt-3 text-right">
+<%= f.submit "保存する",class: 'btn btn-success' %>
+</div>
+<% end %>
+
+
+<h4 class = "pt-3">職務経歴</h4>
 
 <% @work_experiences.each do |work_experience| %>
+<table class = "table">
+<tr>
+<td>会社名</td>
+<td><%= work_experience.company_name %></td>
+</tr>
+<tr>
+<td>業種</td>
+<td><%= work_experience.industory_type_i18n %></td>
+</tr>
+<tr>
+<td>入社年月</td>
+<td><%= work_experience.joined_date&.strftime('%Y年%m月') %></td>
+</tr>
+<tr>
+<td>職務</td>
+<td><%= work_experience.position_i18n %></td>
+</tr>
+<tr>
+<td>職務詳細</td>
+<td><%= work_experience.career_history %></td>
+</tr>
 
-<p>会社名</p>
-<%= work_experience.company_name %>
+</table>
 
-<p>業種</p>
-<%= work_experience.industory_type_i18n %>
-
-<p>入社年月</p>
-<%= work_experience.joined_date&.strftime('%Y年%m月') %>
-
-<p>職務</p>
-<%= work_experience.position_i18n %>
-
-<p>職務詳細</p>
-<%= work_experience.career_history %>
-
-<%= link_to "編集", edit_work_experience_path(work_experience) %>
-
-<% end %>
-
-<%= link_to "マイページに戻る", mypage_path %>
-
-<h2>新規入力</h2>
-<%= form_with model: @work_experience do |f| %>
-
-<%= f.label :company_name, "勤務先名" %>
-<%= f.text_area :company_name %><br>
-
-<!--業種-->
-<%= f.label :industory_type, "業種" %>
-<%= f.select :industory_type, WorkExperience.industory_types.keys.map {|k| [I18n.t("enums.work_experience.industory_type.#{k}"), k]} %><br>
-
-<%= f.label :joined_date, "入社年月" %>
-<%= f.month_field :joined_date %><br>
-
-<%= f.label :position, "職務" %>
-<%= f.select :position, WorkExperience.positions.keys.map {|k| [I18n.t("enums.work_experience.position.#{k}"), k]} %><br>
-
-<%= f.label :career_history, "職務詳細" %>
-<%= f.text_area :career_history %><br>
-
-<%= f.submit "保存する" %><br>
+<div class = "pb-3 text-right">
+<%= link_to "編集する", edit_work_experience_path(work_experience),class:"btn btn-primary" %>
+</div>
 
 <% end %>
+
+<%= link_to "プロフィールに戻る" ,profile_path(current_user.profile),class: 'btn btn-primary' %>
+
+
+</div>
 
 
 

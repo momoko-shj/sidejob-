@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :follows, dependent: :destroy
   has_many :work_experiences, dependent: :destroy
+  
+  
 
   
 

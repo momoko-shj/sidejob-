@@ -24,4 +24,14 @@ class Profile < ApplicationRecord
    follows.exists?(user_id: user.id)
   end
   
+  #検索機能
+  def self.search(search)
+    if search !=""
+      Profile.where(['education LIKE(?) OR introduction LIKE(?) OR skill LIKE(?) OR other_certification LIKE(?) OR additional_information LIKE(?)', "%#{search}%","%#{search}%","%#{search}%","%#{search}%","%#{search}%"])
+    else
+      Profile.all
+    end
+  end
+  
+  
 end

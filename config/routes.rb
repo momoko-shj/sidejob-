@@ -10,6 +10,12 @@ Rails.application.routes.draw do
  scope module: :public do
    root to: 'homes#top'
    get 'mypage' => 'users#mypage', as: 'mypage'
+   resources :users, only:[:edit,:update,:show] do
+   collection do
+          get 'unsubscribe'
+          patch 'withdraw'
+        end
+   end
    resources :rooms, only:[:show,:index,:create]
    resources :work_experiences, only:[:show,:create,:edit,:update]
    resources :messages, only:[:create,:destroy,:update]
@@ -30,7 +36,11 @@ Rails.application.routes.draw do
  namespace :admin do
   root to: 'homes#top' ,as: 'top'
   get 'mypage' => 'users#index', as: 'mypage'
-  resources :users, only:[:show,:edit,:update]
+  resources :users, only:[:show,:edit,:update] do
+   collection do
+          patch 'withdraw'
+        end
+       end
   resources :certifications, only: [:create,:update,:show,:edit]
  end
  

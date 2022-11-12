@@ -1,2 +1,33 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<div class="container">
+<h4 class = "pt-3"><%= @user.name %>さんの登録情報</h4>
+
+<table class = "table table-borderless">
+<tr>
+<th style="width:25%"></th>
+<th style="width:75%"></th>
+</tr>
+<tr>
+<td>ID</td>
+<td><%= @user.identification %></td>
+</tr>
+<tr>
+<td>メールアドレス</td>
+<td><%= @user.email %></td>
+</tr>
+<tr>
+<td>電話番号</td>
+<td><%= @user.phone %></td>
+</tr>
+<tr>
+<td>住所</td>
+<td>〒<%= @user.postal_code %><br><%= @user.prefecture %><%= @user.city %><%= @user.town %></td>
+</tr>
+<tr>
+<td>登録状況</td>
+<td><%= @user.is_deleted ? '退会':'登録中' %></td>
+</tr>
+
+</table>
+
+<h4 class = "pt-3">ユーザープロフィール</h4>
+ <%= render 'layouts/user', user: @user, profile: @profile, work_experience: @work_experience %>

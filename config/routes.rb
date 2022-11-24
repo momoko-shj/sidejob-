@@ -34,14 +34,14 @@ Rails.application.routes.draw do
   }
  
  namespace :admin do
-  root to: 'homes#top' ,as: 'top'
-  get 'mypage' => 'users#index', as: 'mypage'
-  resources :users, only:[:show,:edit,:update] do
-   collection do
-          patch 'withdraw'
-        end
-       end
-  resources :certifications, only: [:create,:update,:show,:edit]
+   root to: 'homes#top' ,as: 'top'
+   get 'mypage' => 'users#index', as: 'mypage'
+   resources :users, only:[:show, :edit, :update] do
+     collection do
+       patch 'withdraw/:id' => 'users#withdraw', as: 'withdraw'
+     end
+     resources :certifications, only: [:create,:update,:show,:edit]
+   end
  end
  
  

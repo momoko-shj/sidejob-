@@ -2,9 +2,10 @@ class Public::UsersController < ApplicationController
 
  def mypage
     @profile = current_user.profile
-    @messages = current_user.messages.all
     @follows = current_user.follows.all
     @comments = current_user.comments.all
+    @rooms = current_user.rooms.all
+    @messages = @rooms.map{|x| x.messages.where.not(user_id: current_user.id)}.flatten!
  end
  
  def edit

@@ -4,17 +4,20 @@
 <h4 class = "pt-3">ダイレクトメール</h4>
 <table class = "table table-borderless">
 <tr>
-  <th style="width:25%"></th>
-  <th style="width:50%"></th>
+  <th style="width:30%"></th>
   <th style="width:25%"></th>
 </tr>
-  <% @messages.each do |message| %>
-<tr>
- <td><%= link_to message.user.identification, room_path(message.room_id) %></td>
- <td><%= message.body %></td>
- <td><%= message.created_at.strftime("%Y-%m-%d %H:%m") %></td>
-</tr>
- <% end %>
+ <% if @messages.present? %>
+  <% @messages.reverse_each do |message| %>
+    <tr>
+      <td><%= link_to message.user.identification, room_path(message.room_id) %>さん
+      <%= message.body %></td>
+      <td><%= message.updated_at.strftime("%Y-%m-%d %H:%m") %></td>
+    </tr>
+  <% end %>
+<% end %>
+
+
 </table>
 
 <h4 class = "pt-5">コメント一覧</h4>
@@ -24,7 +27,7 @@
   <th style="width:50%"></th>
   <th style="width:25%"></th>
 </tr>
-<% @comments.each do |comment| %>
+<% @comments.reverse_each do |comment| %>
 <tr>
 <td><%= link_to comment.profile.user.identification,profile_path(comment.profile)  %></td>
 <td><%= comment.text %></td>
@@ -50,7 +53,7 @@
 <% end %>
 </table>
 
-<%#= link_to "職歴登録へ" ,work_experience_path(current_user.work_experiences), class: 'btn btn-primary' %>
+<%= link_to "職歴登録へ" ,work_experience_path(current_user.work_experiences), class: 'btn btn-primary' %>
 
 <div class = "pl-3 pt-3">
 <%= link_to "自分のプロフィールを確認する" ,profile_path(current_user.profile),class: 'btn btn-primary' %>

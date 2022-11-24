@@ -14,15 +14,11 @@ class Public::RoomsController < ApplicationController
       @message = Message.new
       @entries = @room.entries
     else
-      redirect_back(fallback_location: room_path)
+     redirect_to room_path(room)
     end
   end
  
-# def index
-#   @rooms = current_user.rooms.all
-   
-# end
-  
+
   private
   
   def room_params

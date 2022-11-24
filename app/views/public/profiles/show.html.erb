@@ -52,7 +52,6 @@
 <% if @user.id != current_user.id %>
   <% if @isRoom == true %>
    <%= link_to "このユーザーにメッセージを送る",room_path, class: 'btn btn-primary' %> 
-   <!--上記のコメントが表示されない ifが上手く機能していない？-->
   <% else %>
    <%= form_with model: @room do |f| %>
      <%= fields_for @entry do |entry| %>

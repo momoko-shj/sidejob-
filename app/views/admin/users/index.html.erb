@@ -11,18 +11,20 @@
     <th>登録</th>
     <th>登録日</th>
   </tr>
-   <% @users.each do |users| %>
+   <% @users.each do |user| %>
    <tr>
-    <td><%= link_to users.name, admin_user_path(users) %></td>
-    <td><%= users.identification %></td>
-    <td><%= users.email %></td>
-    <td><%= users.phone %></td>
-    <td><%= users.profile.is_active ? '公開':'非公開' %></td>
+    <td><%= link_to user.name, admin_user_path(user) %></td>
+    <td><%= user.identification %></td>
+    <td><%= user.email %></td>
+    <td><%= user.phone %></td>
+    <td><%= user.profile.is_active ? '公開':'非公開' %></td>
     <td>
-    <%= users.is_deleted ? '退会済':'登録中'%>
-    <%= link_to "退会", withdraw_admin_users_path(@user), method: :patch, class: "btn btn-outline-danger" %>
+    <%= user.is_deleted ? '退会済':'登録中'%>
+    <%= link_to withdraw_admin_users_path(user), method: :patch, class: "btn btn-outline-danger" do %>
+      <%= user.is_deleted ? '復活':'退会'%>
+    <% end %>
 </td>
-    <td><%= users.created_at&.strftime('%Y年%m月%d日 %H:%M') %></td>
+    <td><%= user.created_at&.strftime('%Y年%m月%d日 %H:%M') %></td>
     </tr>
    <% end %>
  </table>

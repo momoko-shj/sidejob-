@@ -11,10 +11,14 @@ class Admin::UsersController < ApplicationController
   
   
  def withdraw
- @user = User.find(params[:id])
- @user.update(is_deleted: true)
- reset_session
- redirect_to  admin_mypage_path
+  @user = User.find(params[:id])
+  if @user.is_deleted
+    @user.update(is_deleted: false)
+  else
+    @user.update(is_deleted: true)
+  end
+  reset_session
+  redirect_to  admin_mypage_path
  end
 
   # def edit

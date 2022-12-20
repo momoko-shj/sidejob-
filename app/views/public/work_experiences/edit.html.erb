@@ -6,7 +6,7 @@
 <table class = "table table-borderless">
 <tr>
 <td><%= f.label :company_name, "勤務先名" %></td>
-<td><%= f.text_area :company_name %></td>
+<td><%= f.text_area :company_name, size: "40x1" %></td>
 </tr>
 <tr>
 <td><%= f.label :industory_type, "業種" %></td>
@@ -21,12 +21,13 @@
 <td><%= f.select :position, WorkExperience.positions.keys.map {|k| [I18n.t("enums.work_experience.position.#{k}"), k]} %></td>
 </tr>
 <tr>
-<td><%= f.label :career_history, "職務詳細" %></td>
-<td><%= f.text_area :career_history %></td>
-</tr>
+<td><%= f.label :career_history, "職務内容の詳細" %></td>
+<td><%= f.text_area :career_history ,size: "40x3"%></td>
+</tr>”
 </table>
 
-<%= f.submit "更新する",class:"btn btn-primary" %>
-
+<div class= "pt-3 text-right">
+  <%= f.submit "更新する",class:"btn btn-primary" %>
+</div>
 <% end %>
 </div>

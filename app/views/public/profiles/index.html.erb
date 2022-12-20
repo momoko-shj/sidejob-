@@ -1,7 +1,7 @@
 <div class = "container">
-<h2>登録ユーザープロフィール一覧</h2>
+<h4 class = "text-center">登録ユーザープロフィール一覧</h4>
 
-<table class = "table">
+<table class = "table pt-5">
 <tr>
   <th></th>
   <th>名前</th>
@@ -20,7 +20,7 @@
 </td>
 <td><%= link_to profile.user.identification, profile_path(profile) %></td>
 <td><%= profile.introduction %></td>
-<td><%= profile.updated_at&.strftime('%Y年%m月%d日 %H:%M') %></td>
+<td><%= profile.updated_at&.strftime('%Y-%m-%d %H:%M') %></td>
 </tr>
 <% end %>
 <% end %>

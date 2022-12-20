@@ -4,10 +4,10 @@
 <%= image_tag 'noimage.png', size: "100x100", class:"offset-md-1 show-img" %>
 <% end %>
 
-<table class= "table">
+<table class= "table table-striped">
 <tr>
 <th style="width:25%"></th>
-<th style="width:75%"></th>
+<th style="width:50%"></th>
 </tr>
 <tr> 
 <td>住所（都道府県）</td>
@@ -41,12 +41,12 @@
 <tr>
 </table>
 
-<h4 class ="pt-3">職務経歴</h4>
-<table class = "table" >
+<h5 class ="pt-3">職務経歴</h5>
+<table class = "table table-striped" >
 <% work_experience.each do |work| %>
 <tr>
 <th style="width:25%"></th>
-<th style="width:75%"></th>
+<th style="width:50%"></th>
 </tr>
 <tr>
   <td>会社名</td>

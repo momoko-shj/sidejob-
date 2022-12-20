@@ -1,31 +1,30 @@
 <div class="container">
-<h4 class = "pt-3"><%= current_user.name %>さんのマイページ</h4>
+<h4 class = "pt-3 text-center"><%= current_user.name %>さんのマイページ</h4>
 
-<h4 class = "pt-3">ダイレクトメール</h4>
-<table class = "table table-borderless">
+<h5 class = "pt-3">新着　ダイレクトメール</h5>
+<table class = "table table-striped table-hover">
 <tr>
-  <th style="width:30%"></th>
-  <th style="width:25%"></th>
+  <th style="width:20%">名前</th>
+  <th style="width:30%">本文</th>
+  <th style="width:20%">更新日時</th>
 </tr>
  <% if @messages.present? %>
-  <% @messages.reverse_each do |message| %>
+  <% @messages.each do |message| %>
     <tr>
-      <td><%= link_to message.user.identification, room_path(message.room_id) %>さん
-      <%= message.body %></td>
+      <td><%= link_to message.user.identification, room_path(message.room_id) %>さん</td>
+      <td><%= message.body %></td>
       <td><%= message.updated_at.strftime("%Y-%m-%d %H:%m") %></td>
     </tr>
   <% end %>
 <% end %>
-
-
 </table>
 
-<h4 class = "pt-5">コメント一覧</h4>
-<table class = "table table-borderless">
+<h5 class = "pt-5">コメント一覧</h5>
+<table class = "table table-striped table-hover">
 <tr>
-  <th style="width:25%"></th>
-  <th style="width:50%"></th>
-  <th style="width:25%"></th>
+  <th style="width:20%">名前</th>
+  <th style="width:30%">本文</th>
+  <th style="width:20%">更新日時</th>
 </tr>
 <% @comments.reverse_each do |comment| %>
 <tr>
@@ -37,30 +36,30 @@
 </table>
 
 
-<h4 class = "pt-5">フォロー中のプロフィール</h4>
-<table class = "table table-borderless">
+<h5 class = "pt-5">フォロー中のプロフィール</h5>
+<table class = "table table-striped table-hover">
 <tr>
-<th style="width:25%"></th>
-<th style="width:25%"></th>
-<th style="width:50%"></th>
+<th style="width:20%">名前</th>
+<th style="width:30%">自己紹介</th>
+<th style="width:20%">更新日時</th>
 
 </tr>
 <% @follows.each do |follow| %>
 <tr>
 <td><%= link_to follow.profile.user.identification, profile_path(follow.profile) %></td>
+<td><%= follow.profile.introduction %></td>
 <td><%= follow.profile.user.created_at.strftime("%Y-%m-%d %H:%m") %></td>
 </tr>
 <% end %>
 </table>
 
-<%= link_to "職歴登録へ" ,work_experience_path(current_user.work_experiences), class: 'btn btn-primary' %>
-
-<div class = "pl-3 pt-3">
+<div class = "pl-3 pt-5 text-center">
+<%= link_to " 自分の職務経歴を登録する " ,work_experience_path(current_user.work_experiences), class: 'btn btn-primary' %>
 <%= link_to "自分のプロフィールを確認する" ,profile_path(current_user.profile),class: 'btn btn-primary' %>
 </div>
 
-<h4 class="pt-5">登録情報</h4>
-<table class = "table table-borderless">
+<h5 class="pt-5"><%= current_user.name %>さんの登録情報</h5>
+<table class = "table table-striped">
 <tr>
 <th style="width:30%"></th>
 <th style="width:70%"></th>
@@ -98,8 +97,8 @@
 </tr>
 </table>
 
-<div class = "pl-3 pt-3">
-<%= link_to '登録情報を変更する', edit_user_path(current_user),class:"btn btn-primary" %>
+<div class = "pl-3 pt-3 text-center">
+<%= link_to '自分の登録情報を変更する', edit_user_path(current_user),class:"btn btn-primary" %>
 <%= link_to '退会する', unsubscribe_users_path(current_user),class:"btn btn-danger" %>
 </div>
 

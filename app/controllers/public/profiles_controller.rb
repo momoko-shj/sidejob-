@@ -35,7 +35,7 @@ class Public::ProfilesController < ApplicationController
       # params[:profile][:certification_ids].each do |certification_id|
       #   CertificationManager.create(profile_id: @profile.id, certification_id: certification_id)
       # end
-      redirect_to mypage_path
+      redirect_to profile_path
     else
       render :edit
     end

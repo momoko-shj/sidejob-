@@ -1,28 +1,38 @@
 <div class = "container">
-<h4 class = "pt-3">プロフィール検索結果一覧</h4>
+<h4 class = "text-center pt-3 pb-5">プロフィール検索結果一覧</h4>
 
 <% @profiles.each do |profile| %>
  <% if current_user %> 
   <% if profile.is_active == true && profile.user.is_deleted == false %>
-  
+  <table class = "table table-borderless">
+   <tr>
+   <td style="width:10%">
    <% if profile.image.attached? %>
-    <%= image_tag profile.image,size:"50,50", class:"offset-md-1 top-img" %>
+    <%= image_tag profile.image,size:"50x50", class:"offset-md-1 top-img" %>
    <% else %>
-    <%= image_tag 'noimage.png', size: "50x50", class:"offset-md-1 top-img" %>
+    <%= image_tag 'noimage.png', size:"50x50", class:"offset-md-1 top-img" %>
    <% end %>
-  
+   </td>
+   <td style="width:50%">
    <%= link_to profile.user.identification, profile_path(profile) %>
+   </td>
+   </tr>
+   </table>
   <% end %>
  
  <% else %>
- 
+  <table class = "table table-borderless">
+   <tr>
+   <td style="width:10%">
   <% if profile.image.attached? %>
     <%= image_tag profile.image,size:"50,50", class:"offset-md-1 top-img" %>
    <% else %>
     <%= image_tag 'noimage.png', size: "50x50", class:"offset-md-1 top-img" %>
    <% end %>
-  
+   </td>
+   <td style="width:50%">
   <%= link_to profile.user.identification, admin_user_path(profile.user) %>
+  </td>
  <% end %>
 
 <% end %>

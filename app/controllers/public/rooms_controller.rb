@@ -4,7 +4,7 @@ class Public::RoomsController < ApplicationController
     room = Room.create
     Entry.create(room_id: room.id, user_id: current_user.id)
     Entry.create(params.require(:room).permit(:user_id, :room_id).merge(room_id: room.id))
-    redirect_to room_path(room)
+    redirect_to rooms_path(@room)
   end
   
   def show
@@ -14,7 +14,7 @@ class Public::RoomsController < ApplicationController
       @message = Message.new
       @entries = @room.entries
     else
-     redirect_to room_path(room)
+     redirect_to rooms_path(@room)
     end
   end
  

@@ -1,4 +1,7 @@
 class Admin::UsersController < ApplicationController
+  
+  # 管理者によるユーザー管理機能
+  
   def show
     @user = User.find(params[:id])
     @profile = @user.profile

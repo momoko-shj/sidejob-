@@ -1,5 +1,7 @@
 class Public::WorkExperiencesController < ApplicationController
   
+  # 職務経歴を記載・公開する機能
+  
   def show
    @user = current_user
    @work_experiences = current_user.work_experiences.all

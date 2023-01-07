@@ -1,5 +1,7 @@
 class Public::CommentsController < ApplicationController
   
+  # プロフィールにコメントを記述する
+  
   def create
     profile = Profile.find(params[:profile_id])
     text = current_user.comments.new(comment_params)

@@ -1,12 +1,15 @@
 class Public::ProfilesController < ApplicationController
   
-  # プロフィール作成画面
+  # ユーザーによるプロフィール作成機能　サイト内で公開される情報
+  
   def new
     @profile = Profile.new
     @certification = Certification.new
     @user = current_user
   end
   
+   # コメントアウト部分：資格登録機能でメンターにより実装済み。エラーとなった際に自力での対応が困難と判断し取り下げ。
+   
   def create
     @profile = Profile.new(profile_params)
     @profile.user_id = current_user.id
@@ -19,7 +22,6 @@ class Public::ProfilesController < ApplicationController
       render :new
     end
   end
-  # 新規登録をかけるとエラー（14行目のparams)
   
  
   # プロフィール編集画面

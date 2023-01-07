@@ -1,5 +1,7 @@
 class Admin::CertificationsController < ApplicationController
   
+  # 管理者による資格登録機能。controllerやviewの記述まで完成しているが稼働が不安定で自力でのエラー対応が困難なため実装していない
+  
   def show
     @certification = Certification.new
     @certifications = Certification.all

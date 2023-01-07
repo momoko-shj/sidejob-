@@ -1,5 +1,7 @@
 class Public::RoomsController < ApplicationController
  
+# ダイレクトメッセージのトークルーム　entryモデルは中間テーブル
+ 
   def create
     room = Room.create
     Entry.create(room_id: room.id, user_id: current_user.id)

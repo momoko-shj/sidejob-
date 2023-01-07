@@ -1,5 +1,7 @@
 class Public::MessagesController < ApplicationController
   
+  # ユーザーにダイレクトメールを送信する機能
+  
    def create
      if Entry.where(user_id: current_user.id, room_id: params[:message][:room_id]).present?
        @message = current_user.messages.create!(message_params)

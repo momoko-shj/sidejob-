@@ -1,4 +1,6 @@
 class Public::UsersController < ApplicationController
+  
+  # ユーザー登録情報　サイトでは公開されない
 
  def mypage
     @profile = current_user.profile

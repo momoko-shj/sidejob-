@@ -1,5 +1,7 @@
 class Public::FollowsController < ApplicationController
   
+  # 気になるプロフィールをフォローする機能
+  
   def create
     profile = Profile.find(params[:profile_id])
     follow = current_user.follows.new(profile_id: profile.id)

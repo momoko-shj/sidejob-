@@ -15,5 +15,11 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :follows, dependent: :destroy
   has_many :work_experiences, dependent: :destroy
+  
+  validates :name, presence: true
+  validates :phone, presence: true
+  validates :postal_code, presence: true
+  validates :prefecture, presence: true
+  validates :town, presence: true
 
 end

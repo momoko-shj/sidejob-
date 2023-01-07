@@ -32,6 +32,6 @@ class Profile < ApplicationRecord
       Profile.all
     end
   end
-  
+
   
 end

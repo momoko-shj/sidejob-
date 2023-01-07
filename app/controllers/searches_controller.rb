@@ -1,5 +1,7 @@
 class SearchesController < ApplicationController
   
+  # プロフィール情報を検索する機能
+  
   def result
     # if params[:education, :introduction, :skill, :other_certification, :additional_information].present?
     #   @profiles = Profile.where('name LIKE?', "%#{params[:education,:introduction,:skill,:other_certification,:additional_information]}%")

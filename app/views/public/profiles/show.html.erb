@@ -66,12 +66,12 @@
 <div class = "col-md-4">
 <% if @user.id != current_user.id %>
   <% if @isRoom == true %>
-   <%= link_to "このユーザーにメッセージを送る",room_path, class: 'btn btn-primary' %> 
+   <%= link_to "このユーザーにメッセージを送る", room_path(@room), class: 'btn btn-primary' %> 
   <% else %>
    <%= form_with model: @room do |f| %>
-     <%= fields_for @entry do |entry| %>
+     <!--<#%= fields_for @entry do |entry| %>-->
       <%= f.hidden_field :user_id, value: @user.id %>
-     <% end %>
+     <%# end %>
       <%= f.submit "このユーザーに初めてメッセージを送る",class:"btn btn-primary" %>
      <% end %>
   <% end %>

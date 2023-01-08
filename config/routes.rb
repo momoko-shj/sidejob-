@@ -16,7 +16,7 @@ Rails.application.routes.draw do
           patch 'withdraw'
         end
    end
-   resources :rooms, only:[:show,:index,:create]
+   resources :rooms, only:[:show,:create]
    resources :work_experiences, only:[:show,:create,:edit,:update]
    resources :messages, only:[:create,:destroy,:update]
    resources :certifications, only:[:show,:show]

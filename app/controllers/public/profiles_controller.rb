@@ -1,7 +1,6 @@
 class Public::ProfilesController < ApplicationController
   
-  # ユーザーによるプロフィール作成機能　サイト内で公開される情報
-  
+  # ユーザーによるプロフィール作成機能
   def new
     @profile = Profile.new
     @certification = Certification.new
@@ -53,18 +52,25 @@ class Public::ProfilesController < ApplicationController
     @comment = Comment.new
     @user = @profile.user
     @work_experience = @user.work_experiences
-    @currentUserEntry = Entry.where(user_id: current_user.id)
-    @userEntry = Entry.where(user_id: @user.id)
+    
+    (current_user.rooms.ids & @user.rooms.ids).present?
+    
+
+    # @currentUserEntry = Entry.where(user_id: current_user.id)
+    # @userEntry = Entry.where(user_id: @user.id)
     if @user.id != current_user.id
-      @currentUserEntry.each do |cu|
-        @userEntry.each do |u|
-          if cu.room_id == u.room.id then
-            @isRoom = true
-            @roomId = cu.room_id
-          end
-        end 
-      end
-      if !@isRoom
+      # @currentUserEntry.each do |cu|
+      #  @userEntry.each do |u|
+          # if cu.room_id == u.room.id then
+            #@isRoom = true
+            #@roomId = cu.room_id
+          #end
+        #end 
+      #end
+      @isRoom = (current_user.rooms.ids & @user.rooms.ids).present?
+      if @isRoom
+        @room = Room.find((current_user.rooms.ids & @user.rooms.ids).first)
+      else
         @room = Room.new
         @entry = Entry.new
       end
